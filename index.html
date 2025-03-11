@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roman Numeral Converter</title>
+    <link href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-roman me-2"></i>
+                Roman Converter
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#converter">Converter</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="roman-background">
+        <div class="container py-5">
+            <!-- Home Section -->
+            <section id="home" class="mb-5">
+                <div class="text-center">
+                    <h1 class="display-4 roman-title">Roman Numeral Converter</h1>
+                    <p class="lead">Convert numbers between Roman and Arabic numerals with style</p>
+                </div>
+            </section>
+
+            <!-- Converter Section -->
+            <section id="converter" class="mb-5">
+                <div class="converter-card">
+                    <ul class="nav nav-tabs mb-4" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="int-to-roman-tab" data-bs-toggle="tab" 
+                                    data-bs-target="#int-to-roman" type="button" role="tab">Integer to Roman</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="roman-to-int-tab" data-bs-toggle="tab" 
+                                    data-bs-target="#roman-to-int" type="button" role="tab">Roman to Integer</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <!-- Integer to Roman -->
+                        <div class="tab-pane fade show active" id="int-to-roman" role="tabpanel">
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="input-section">
+                                        <label for="numberInput" class="form-label">Enter Number (1-3999)</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-hashtag"></i>
+                                            </span>
+                                            <input type="number" class="form-control" id="numberInput" 
+                                                   placeholder="Enter a number" min="1" max="3999">
+                                            <button class="btn btn-primary" id="convertToRomanBtn">
+                                                <i class="fas fa-exchange-alt me-2"></i>Convert
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="result-section">
+                                        <label class="form-label">Roman Numeral</label>
+                                        <div class="result-display" id="romanResult">
+                                            <span class="placeholder">Result will appear here</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Roman to Integer -->
+                        <div class="tab-pane fade" id="roman-to-int" role="tabpanel">
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="input-section">
+                                        <label for="romanInput" class="form-label">Enter Roman Numeral</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-font"></i>
+                                            </span>
+                                            <input type="text" class="form-control" id="romanInput" 
+                                                   placeholder="Enter Roman numeral" pattern="^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$">
+                                            <button class="btn btn-primary" id="convertToIntBtn">
+                                                <i class="fas fa-exchange-alt me-2"></i>Convert
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="result-section">
+                                        <label class="form-label">Integer</label>
+                                        <div class="result-display" id="integerResult">
+                                            <span class="placeholder">Result will appear here</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="error-message mt-3" id="errorMessage"></div>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section id="about" class="mb-5">
+                <div class="content-card">
+                    <h2 class="section-title">About Roman Numerals</h2>
+                    <p>Roman numerals are a numeral system that originated in ancient Rome and remained the usual 
+                    way of writing numbers throughout Europe well into the Late Middle Ages. Numbers are represented 
+                    by combinations of letters from the Latin alphabet.</p>
+                    <div class="roman-examples mt-4">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="example-card">
+                                    <h5>Basic Symbols</h5>
+                                    <p>I = 1, V = 5, X = 10</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="example-card">
+                                    <h5>Larger Values</h5>
+                                    <p>L = 50, C = 100, D = 500, M = 1000</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="example-card">
+                                    <h5>Example</h5>
+                                    <p>MCMXCIX = 1999</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="mb-5">
+                <div class="content-card">
+                    <h2 class="section-title">Contact Us</h2>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="contact-info">
+                                <h5><i class="fas fa-envelope me-2"></i>Email</h5>
+                                <p>siddharthdosi259@gmail.com</p>
+                                <h5><i class="fas fa-phone me-2"></i>Phone</h5>
+                                <p>+91 (904) 390-9438</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="contact-form">
+                                <form id="contactForm">
+                                    <div class="mb-3">
+                                        <input type="email" class="form-control" placeholder="Your Email">
+                                    </div>
+                                    <div class="mb-3">
+                                        <textarea class="form-control" rows="3" placeholder="Your Message"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-paper-plane me-2"></i>Send Message
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/converter.js') }}"></script>
+</body>
+</html>
